@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+motor
+python-dotenv
+opencv-python-headless
+requests
+traci
+ultralytics

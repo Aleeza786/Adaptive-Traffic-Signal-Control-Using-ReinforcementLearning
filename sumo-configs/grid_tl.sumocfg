@@ -1,0 +1,10 @@
+<configuration>
+    <input>
+        <net-file value="grid_tl.net.xml"/>
+        <route-files value="grid_tl.rou.xml"/>
+    </input>
+    <time>
+        <begin value="0"/>
+        <end value="1000"/>
+    </time>
+</configuration>

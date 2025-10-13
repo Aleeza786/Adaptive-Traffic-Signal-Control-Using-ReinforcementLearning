@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>ATSC Dashboard (static)</title>
+</head>
+<body>
+  <h2>Intersection Dashboard (Static)</h2>
+  <div id="status">Connecting...</div>
+  <div><strong>Phase:</strong> <span id="phase">-</span></div>
+  <div><strong>Queues:</strong> <span id="queues">-</span></div>
+
+  <script>
+    const statusEl = document.getElementById('status');
+    const phaseEl = document.getElementById('phase');
+    const queuesEl = document.getElementById('queues');
+    const ws = new WebSocket('ws://localhost:8000/ws/intersection_1');
+    ws.onopen = () => { statusEl.textContent = 'WS Connected'; };
+    ws.onmessage = (evt) => {
+      const data = JSON.parse(evt.data);
+      phaseEl.textContent = data.phase ?? '-';
+      queuesEl.textContent = (data.queues || []).join(', ');
+    };
+    ws.onclose = () => { statusEl.textContent = 'WS Closed'; };
+    ws.onerror = (e) => { statusEl.textContent = 'WS Error'; console.error(e); };
+  </script>
+</body>
+</html>
